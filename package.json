@@ -1,0 +1,60 @@
+{
+  "name": "cms_binance",
+  "author": {
+    "name": "Stephane Roche",
+    "email": "bitcoin-studio@protonmail.com",
+    "url": "https://bitcoin-studio.com"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": "^12.14.1"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "lint": "eslint --ext .ts,.tsx pages/ components/",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@cypress/code-coverage": "^1.11.0",
+    "@cypress/instrument-cra": "^1.0.0",
+    "@types/node": "^13.7.0",
+    "@types/react": "^16.9.19",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "axios": "^0.19.2",
+    "cypress": "^3.8.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-plugin-cypress": "^2.8.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "glob": "^7.1.6",
+    "gray-matter": "^4.0.2",
+    "loglevel": "^1.6.6",
+    "mongoose": "^5.8.11",
+    "next": "^9.2.1",
+    "nyc": "^15.0.0",
+    "raw-loader": "^4.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-markdown": "^4.3.1",
+    "typescript": "^3.7.5"
+  }
+}
