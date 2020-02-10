@@ -1,7 +1,7 @@
 ---
 author: Siddhartha Mukherjee
 date: '2019-07-10T07:00:00.000Z'
-hero_image: /alfons-taekema-bali.jpg
+heroImage: /alfons-taekema-bali.jpg
 title: 'Bali —body, mind & soul'
 ---
 The term **bristlecone pine** covers three [species](https://en.wikipedia.org/wiki/Species "Species") of [pine](https://en.wikipedia.org/wiki/Pine "Pine") tree. All three species are long-lived and highly resilient to harsh weather and bad soils. One of the three species, _Pinus longaeva_, is among the longest-lived life forms on Earth. The oldest _Pinus longaeva_ is more than 5,000 years old,[\[1\]](https://en.wikipedia.org/wiki/Bristlecone_pine#cite_note-oldest-1) making it the oldest known individual of any species.

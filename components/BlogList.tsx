@@ -27,8 +27,8 @@ const BlogList = ({allBlogs}: BlogListProps) => {
           >
             <a>
               <li>
-                <div className="hero_image">
-                  <img src={post.document.data.hero_image} alt={post.document.data.hero_image}/>
+                <div className="heroImage">
+                  <img src={post.document.data.heroImage} alt={post.document.data.heroImage}/>
                 </div>
                 <div className="blog__info">
                   <h2>{post.document.data.title}</h2>
@@ -57,7 +57,7 @@ const BlogList = ({allBlogs}: BlogListProps) => {
           a:hover {
             opacity: 1;
           }
-          a:hover li div.hero_image img {
+          a:hover li div.heroImage img {
             opacity: 0.8;
             transition: opacity 0.3s ease;
           }
@@ -65,13 +65,13 @@ const BlogList = ({allBlogs}: BlogListProps) => {
             transform: translateX(10px);
             transition: transform 0.5s ease-out;
           }
-          .hero_image {
+          .heroImage {
             width: 100%;
             height: 33vh;
             overflow: hidden;
             background-color: #000;
           }
-          .hero_image img {
+          .heroImage img {
             object-fit: cover;
             object-position: 50% 50%;
             opacity: 1;
@@ -118,10 +118,10 @@ const BlogList = ({allBlogs}: BlogListProps) => {
               height: 33.333vh;
               flex-direction: row;
             }
-            .hero_image {
+            .heroImage {
               height: 100%;
             }
-            .hero_image img {
+            .heroImage img {
               min-width: 100%;
               height: 100%;
               width: auto;

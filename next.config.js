@@ -1,6 +1,10 @@
+require('dotenv').config()
 const glob = require('glob')
 
 module.exports = ({
+  env: {
+    MONGODB_PASS: process.env.MONGODB_PASS
+  },
   webpack: function (config) {
     config.module.rules.push({
       test: /\.md$/,

@@ -28,7 +28,7 @@ const BlogTemplate = ({content, data, statusCode}: BlogTemplateProps) => {
       <article className="blog">
         <figure className="blog__hero">
           <img
-            src={frontmatter.hero_image}
+            src={frontmatter.heroImage}
             alt={`blog_hero_${frontmatter.title}`}
           />
         </figure>

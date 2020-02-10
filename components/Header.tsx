@@ -15,7 +15,7 @@ const Header = () => (
       </Link>
 
       <Link
-        href="/edit"
+        href="/admin"
       >
         <h1>Admin</h1>
       </Link>

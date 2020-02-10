@@ -1,7 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
 import matter from 'gray-matter'
+import axios from 'axios'
 import BlogList from '../components/BlogList'
+import log from 'loglevel'
 
 type HomeProps = {
   allBlogs: any
@@ -19,7 +21,18 @@ const Home = ({allBlogs}: HomeProps) => (
   </>
 )
 
-Home.getInitialProps = () => {
+Home.getInitialProps = async () => {
+  // Get posts from database
+  let dbData = {}
+  try {
+    const res = await axios('http://localhost:3000/api/blog')
+    dbData = await res.data
+    console.log('dbData--', dbData)
+  } catch (err) {
+    log.error(err)
+  }
+
+
   // get posts & context from folder
   const posts = ((context) => {
     const keys = context.keys()
@@ -44,6 +57,7 @@ Home.getInitialProps = () => {
 
   return {
     allBlogs: posts,
+    dbData: dbData,
   }
 }
 
