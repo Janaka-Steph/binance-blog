@@ -3,6 +3,7 @@
 * [x] Next.js
 * [x] React.js
 * [x] MongoDB database via MongoDB Atlas (contact me for credentials)
+** You need a '.env.build' file at the root of the project with MONGODB_PASS secret
 * [x] Mongoose ODM
 * [x] Typescript
 * [x] Eslint

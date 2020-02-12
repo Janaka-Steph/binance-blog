@@ -100,4 +100,9 @@ jspm_packages/
 .env
 .env.test
 .env.production
+.env.build
 !/.gitignore
+
+.now
+
+README.html
