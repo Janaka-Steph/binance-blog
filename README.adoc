@@ -12,3 +12,4 @@
 * [ ] Image upload (instead of random selection)
 * [ ] Better post updating (it updates if same title is used)
 * [ ] Fix nyc test coverage with Typescript
+* [ ] Fix deployment on Now
