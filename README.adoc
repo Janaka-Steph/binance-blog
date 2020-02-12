@@ -2,5 +2,11 @@
 
 == Tech Stack
 
-* Next.js
-* React.js
+* [x] Next.js
+* [x] React.js
+* [x] Typescript
+* [x] Eslint
+* [x] Styled-jsx with styled-jsx-plugin-sass
+* [ ] Image upload (instead of random selection)
+* [ ] Cypress tests
+* [ ] Better post updating (it works if same title is used)

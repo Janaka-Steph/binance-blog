@@ -1,20 +1,28 @@
 import nextConnect from 'next-connect'
 import log from 'loglevel'
 import mongoose from 'mongoose'
+import {generateSlugFromTitle} from '../utils'
 
 const connectionString = `mongodb+srv://steph_atlas:${process.env.MONGODB_PASS}@cluster0-8bl57.gcp.mongodb.net/binance`
+
 const Schema = mongoose.Schema
-const blogSchema = new Schema({
+const PostSchema = new Schema({
   title: {type: String, required: true, max: 100, trim: true},
   author: {type: String, required: true, max: 100, trim: true},
-  content: {type: String, required: true, max: 500, trim: true},
-  date: {type: Date, default: Date.now},
-  heroImage: {type: String, required: true, max: 50, trim: true},
+  slug: {type: String, max: 50, trim: true},
+  postBody: {type: Schema.Types.Mixed, required: true},
+  creationDate: {type: Date, default: Date.now},
+  updateDate: {type: Date},
+  heroImage: {type: String, max: 50, trim: true},
+})
+
+PostSchema.pre('save', function preCb(next) {
+  (this as any).slug = generateSlugFromTitle((this as any).title)
+  next()
 })
 
 function database(req: any, res: any, next: any) {
   const db = mongoose.connection
-
   db.on('error', (err) => {
     log.error('Error in mongodb connection:', err)
   })
@@ -27,7 +35,7 @@ function database(req: any, res: any, next: any) {
       .then(() => log.info('Connected to database'))
       .catch((err) => log.error(err))
   }
-  req.db = mongoose.models.Blog || mongoose.model('Blog', blogSchema)
+  req.db = mongoose.models.Post || mongoose.model('Post', PostSchema)
   next()
 }
 

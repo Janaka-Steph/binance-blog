@@ -8,26 +8,35 @@ const Header = () => (
       role="navigation"
       aria-label="main navigation"
     >
-      <Link
-        href="/"
-      >
-        <h1>Binance Research</h1>
+      <Link href="/">
+        <h1>
+          <img src="/binance_logo.svg" alt="Binance logo"/>
+        </h1>
       </Link>
 
-      <Link
-        href="/admin"
-      >
-        <h1>Admin</h1>
+      <Link href="/admin">
+        <h2>Admin</h2>
       </Link>
     </nav>
 
     <style jsx={true}>
       {`
-          h1 {
-            margin-bottom: 0;
+          .header {
+            background-color: #08121d;
           }
-          h1:hover {
-            cursor: pointer;
+          h1, h2 {
+           &:hover {
+              cursor: pointer;
+            }
+          }
+          h1 {
+            img {
+              width: 90%;
+            }
+          }
+          h2 {
+            color: #f0b909;
+            font-size: 2rem;
           }
           nav {
             padding: 1.5rem 1.25rem;

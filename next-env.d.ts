@@ -6,8 +6,10 @@ declare module 'next-connect'
 type Post = {
   _id: mongodb.ObjectID
   title: string
-  date: Date
   author: string
-  heroImage: string
-  content: string
+  postBody: mongodb.Mixed
+  creationDate: Date
+  updateDate?: Date
+  heroImage?: string
+  slug: string
 }

@@ -1,23 +1,27 @@
 import React from 'react'
-import matter from 'gray-matter'
-import ReactMarkdown from 'react-markdown'
 import log from 'loglevel'
 import Error from 'next/error'
+import draftToHtml from 'draftjs-to-html'
+import axios from 'axios'
+import sanitizeHTML from 'sanitize-html'
 
-type BlogTemplateProps = {
-  data: any
-  content: any
+type BlogTemplateProps = Post & {
   statusCode: number
 }
 
-const BlogTemplate = ({content, data, statusCode}: BlogTemplateProps) => {
-  function reformatDate(fullDate: string | number | Date) {
+const BlogTemplate = ({
+  title,
+  postBody,
+  heroImage,
+  author,
+  creationDate,
+  updateDate,
+  statusCode,
+}: BlogTemplateProps) => {
+  function reformatDate(fullDate: any) {
     const date = new Date(fullDate)
     return date.toDateString().slice(4)
   }
-
-  const markdownBody = content
-  const frontmatter = data
 
   if (statusCode) {
     return <Error statusCode={statusCode}/>
@@ -28,21 +32,27 @@ const BlogTemplate = ({content, data, statusCode}: BlogTemplateProps) => {
       <article className="blog">
         <figure className="blog__hero">
           <img
-            src={frontmatter.heroImage}
-            alt={`blog_hero_${frontmatter.title}`}
+            src={heroImage}
+            alt={`blog_hero_${title}`}
           />
         </figure>
         <div className="blog__info">
-          <h1>{frontmatter.title}</h1>
-          <h3>{reformatDate(frontmatter.date)}</h3>
+          <h1>{title}</h1>
+          <h3>{reformatDate(creationDate)}</h3>
+          {
+            updateDate && <h3>{`Last modified ${reformatDate(updateDate)}`}</h3>
+          }
         </div>
-        <div className="blog__body">
-          <ReactMarkdown source={markdownBody}/>
-        </div>
+        <div
+          className="blog__body"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHTML(draftToHtml(postBody)),
+          }}
+        />
         <h2 className="blog__footer">
           Written By:
           {' '}
-          {frontmatter.author}
+          {author}
         </h2>
       </article>
 
@@ -182,20 +192,20 @@ const BlogTemplate = ({content, data, statusCode}: BlogTemplateProps) => {
 }
 
 BlogTemplate.getInitialProps = async (ctx: { query: { slug: any } }) => {
-  let data
+  let post
   try {
     const {slug} = ctx.query
-    const content = await import(`../../posts/${slug}.md`)
-    data = matter(content.default)
+    const res = await axios(`http://localhost:3000/api/blog/${slug}`)
+    post = await res.data
   } catch (err) {
     log.error(err)
     return {
-      statusCode: 500
+      statusCode: 500,
     }
   }
 
   return {
-    ...data,
+    ...post,
   }
 }
 

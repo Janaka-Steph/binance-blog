@@ -1,16 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
+import draftToHtml from 'draftjs-to-html'
+import sanitizeHTML from 'sanitize-html'
 
 type BlogListProps = {
-  allBlogs: any
+  posts: [Post]
 }
 
-const BlogList = ({allBlogs}: BlogListProps) => {
-  function truncateSummary(content: string) {
-    return content.slice(0, 250).trimEnd()
-  }
-
+const BlogList = ({posts}: BlogListProps) => {
   function reformatDate(fullDate: string | number | Date) {
     const date = new Date(fullDate)
     return date.toDateString().slice(4)
@@ -19,7 +16,7 @@ const BlogList = ({allBlogs}: BlogListProps) => {
   return (
     <>
       <ul className="list">
-        {allBlogs.length > 1 && allBlogs.map((post: any) => (
+        {posts.length && posts.map((post: Post) => (
           <Link
             key={post.slug}
             href="/blog/[slug]"
@@ -28,19 +25,15 @@ const BlogList = ({allBlogs}: BlogListProps) => {
             <a>
               <li>
                 <div className="heroImage">
-                  <img src={post.document.data.heroImage} alt={post.document.data.heroImage}/>
+                  <img src={post.heroImage} alt="random images"/>
                 </div>
                 <div className="blog__info">
-                  <h2>{post.document.data.title}</h2>
+                  <h2>{post.title}</h2>
                   <h3>
-                    {reformatDate(post.document.data.date)}
+                    {reformatDate(post.creationDate)}
                   </h3>
                   <p>
-                    <ReactMarkdown
-                      allowedTypes={['text']}
-                      source={post.document.content}
-                      unwrapDisallowed={true}
-                    />
+                    {sanitizeHTML(draftToHtml(post.postBody), {allowedTags: []})}
                   </p>
                 </div>
               </li>

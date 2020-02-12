@@ -1,4 +1,7 @@
+// Global CSS
 import '../assets/global_styles.css'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+// Imports
 import React from 'react'
 import {AppProps} from 'next/app'
 import log from 'loglevel'
