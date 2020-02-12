@@ -1,6 +1,8 @@
 import nextConnect from 'next-connect'
 import {ObjectID} from 'bson'
-// import log from 'loglevel'
+import log from 'loglevel'
+import {NextApiRequest, NextApiResponse} from 'next'
+import {Model} from 'mongoose'
 import middleware from '../../../middleware/database'
 
 const handler = nextConnect()
@@ -16,9 +18,18 @@ const defaultData: Post = {
   slug: '',
 }
 
-handler.get(async (req: any, res: any) => {
-  const doc = await req.db.find({slug: req.query.slug}) || defaultData
-  await res.json(doc[0])
+type NextApiReq = NextApiRequest & {
+  db: Model<Post>
+}
+
+handler.get(async (req: NextApiReq, res: NextApiResponse) => {
+  try {
+    const doc = await req.db.find({slug: req.query.slug}) || defaultData
+    res.status(200).json(doc[0])
+  } catch (err) {
+    log.error(err)
+    res.status(500).end()
+  }
 })
 
 export default handler

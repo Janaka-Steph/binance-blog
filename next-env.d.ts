@@ -3,7 +3,7 @@
 
 declare module 'next-connect'
 
-type Post = {
+type Post = mongoose.Document & {
   _id: mongodb.ObjectID
   title: string
   author: string

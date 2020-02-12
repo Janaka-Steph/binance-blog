@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import axios from 'axios'
 import log from 'loglevel'
+import {NextPageContext} from 'next'
 import BlogList from '../components/BlogList'
 
 type HomeProps = {
@@ -20,11 +21,12 @@ const Home = ({posts}: HomeProps) => (
   </>
 )
 
-Home.getInitialProps = async () => {
+Home.getInitialProps = async (ctx: NextPageContext) => {
   // Get posts from database
   let posts = {}
   try {
-    const res = await axios('http://localhost:3000/api/blog')
+    const axioscfg = ctx.req ? {baseURL: 'http://localhost:3000'} : {}
+    const res = await axios('/api/blog', axioscfg)
     posts = await res.data
   } catch (err) {
     log.error(err)

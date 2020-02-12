@@ -2,6 +2,8 @@ import nextConnect from 'next-connect'
 import {ObjectID} from 'bson'
 import log from 'loglevel'
 import glob from 'glob'
+import {NextApiRequest, NextApiResponse} from 'next'
+import {Model} from 'mongoose'
 import middleware from '../../../middleware/database'
 import {generateSlugFromTitle} from '../../../utils'
 
@@ -18,18 +20,27 @@ const defaultData: Post = {
   slug: '',
 }
 
+type NextApiReq = NextApiRequest & {
+  db: Model<Post>
+}
+
 /**
  * Get all blog posts
  */
-handler.get(async (req: any, res: any) => {
-  const doc = await req.db.find() || defaultData
-  await res.json(doc)
+handler.get(async (req: NextApiReq, res: NextApiResponse) => {
+  try {
+    const doc = await req.db.find() || defaultData
+    res.status(200).json(doc)
+  } catch (err) {
+    log.error(err)
+    res.status(500).end()
+  }
 })
 
 /**
  * Save a blog post
  */
-handler.post((req: any, res: any) => {
+handler.post((req: NextApiReq, res: NextApiResponse) => {
   const post: Post = req.body
   if (!post.title) {
     log.error('Title is missing')
@@ -56,12 +67,13 @@ handler.post((req: any, res: any) => {
           const doc = await req.db.create(post)
           await doc.save()
           log.info('Blog post created!')
+          res.status(200).end()
         }
       })
   } catch (err) {
     log.error(err)
+    res.status(500).end()
   }
-  res.end()
 })
 
 export default handler
