@@ -1,12 +1,11 @@
 = Binance CMS
 
-== Tech Stack
-
 * [x] Next.js
 * [x] React.js
 * [x] Typescript
 * [x] Eslint
 * [x] Styled-jsx with styled-jsx-plugin-sass
+* [x] Basic Cypress tests
 * [ ] Image upload (instead of random selection)
-* [ ] Cypress tests
-* [ ] Better post updating (it works if same title is used)
+* [ ] Better post updating (it updates if same title is used)
+* [ ] Fix nyc test coverage with Typescript

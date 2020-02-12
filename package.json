@@ -24,9 +24,13 @@
     "node": "^12.14.1"
   },
   "scripts": {
-    "dev": "next",
     "build": "next build",
+    "check-coverage-limits": "nyc report --reporter=text-summary --check-coverage --statements 100",
+    "cy:open": "cypress open",
+    "dev": "next",
+    "e2e": "start-test dev 3000 cy:open",
     "lint": "eslint --ext .ts,.tsx pages/ components/ middleware/",
+    "pree2e": "rm -rf .nyc_output coverage .next || true",
     "start": "next start"
   },
   "dependencies": {
@@ -45,7 +49,7 @@
     "@typescript-eslint/parser": "^2.19.0",
     "axios": "^0.19.2",
     "bson": "^4.0.3",
-    "cypress": "^3.8.3",
+    "cypress": "^4.0.1",
     "dotenv": "^8.2.0",
     "draft-js": "^0.11.4",
     "draftjs-to-html": "^0.9.1",
@@ -70,6 +74,7 @@
     "react-draft-wysiwyg": "^1.14.4",
     "react-final-form": "^6.3.5",
     "sanitize-html": "^1.21.1",
+    "start-server-and-test": "^1.10.8",
     "styled-jsx-plugin-sass": "^1.0.0",
     "sweetalert": "^2.1.2",
     "typescript": "^3.7.5"
