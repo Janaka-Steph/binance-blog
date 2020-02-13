@@ -59,10 +59,11 @@ handler.post((req: NextApiReq, res: NextApiResponse) => {
           await p.save()
           log.info('Blog post updated!')
         } else {
-          // A random image is selected! TODO
+          // A random image is selected!
+          // TODO not working on Now serverless
           const imgPaths = glob.sync('public/images/**/*.{jpg,jpeg}')
           const randomImgPath = imgPaths[Math.floor(Math.random() * imgPaths.length)]
-          post.heroImage = randomImgPath.substring(randomImgPath.indexOf('/'))
+          post.heroImage = randomImgPath?.substring(randomImgPath.indexOf('/'))
           // Create new post
           const doc = await req.db.create(post)
           await doc.save()

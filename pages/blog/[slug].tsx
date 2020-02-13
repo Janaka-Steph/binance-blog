@@ -4,6 +4,8 @@ import Error from 'next/error'
 import draftToHtml from 'draftjs-to-html'
 import axios from 'axios'
 import sanitizeHTML from 'sanitize-html'
+import {NextPageContext} from 'next'
+import {getBaseURL} from '../../utils'
 
 type BlogTemplateProps = Post & {
   statusCode: number
@@ -191,11 +193,11 @@ const BlogTemplate = ({
   )
 }
 
-BlogTemplate.getInitialProps = async (ctx: { query: { slug: any } }) => {
+BlogTemplate.getInitialProps = async ({query, req}: NextPageContext) => {
   let post
   try {
-    const {slug} = ctx.query
-    const res = await axios(`http://localhost:3000/api/blog/${slug}`)
+    const {slug} = query
+    const res = await axios.get(`/api/blog/${slug}`, {baseURL: getBaseURL(req)})
     post = await res.data
   } catch (err) {
     log.error(err)

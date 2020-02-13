@@ -5,6 +5,7 @@ import {convertToRaw, EditorState, ContentState} from 'draft-js'
 import axios from 'axios'
 import swal from 'sweetalert'
 import DraftEditor from '../components/DraftEditor'
+import {getBaseURL} from '../utils'
 
 type FormValues = {
   title: string
@@ -32,7 +33,7 @@ const Admin = () => {
     }
 
     try {
-      await axios.post('/api/blog', data)
+      await axios.post('/api/blog', data, {baseURL: getBaseURL()})
       swal({
         title: 'Good job!',
         text: 'Your Post Has Been Saved!',

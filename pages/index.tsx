@@ -4,6 +4,7 @@ import axios from 'axios'
 import log from 'loglevel'
 import {NextPageContext} from 'next'
 import BlogList from '../components/BlogList'
+import {getBaseURL} from '../utils'
 
 type HomeProps = {
   posts: [Post]
@@ -21,12 +22,11 @@ const Home = ({posts}: HomeProps) => (
   </>
 )
 
-Home.getInitialProps = async (ctx: NextPageContext) => {
+Home.getInitialProps = async ({req}: NextPageContext) => {
   // Get posts from database
   let posts = {}
   try {
-    const axioscfg = ctx.req ? {baseURL: 'http://localhost:3000'} : {}
-    const res = await axios('/api/blog', axioscfg)
+    const res = await axios.get('/api/blog', {baseURL: getBaseURL(req)})
     posts = await res.data
   } catch (err) {
     log.error(err)

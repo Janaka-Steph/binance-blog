@@ -4,14 +4,15 @@
 * [x] React.js
 * [x] MongoDB database via MongoDB Atlas (contact me for credentials)
 ** You need a '.env.build' file at the root of the project with MONGODB_PASS secret
-** You need to whitelist your IP via Atlas interface
+** All IPs have been whitelisted
 * [x] Mongoose ODM
 * [x] Typescript
 * [x] Eslint
 * [x] Styled-jsx with styled-jsx-plugin-sass
 * [x] Basic Cypress tests
 * [x] Draft.js wysiwyg
-* [x] Deployed on Zeit Now
+* [ ] Fix deployment on Zeit Now
+** Current issue accessing images in public from serverless function
 * [ ] Image upload (instead of random selection)
 * [ ] Better post updating (it updates if same title is used)
 * [ ] Fix nyc test coverage with Typescript
