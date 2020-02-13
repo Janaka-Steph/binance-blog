@@ -4,11 +4,13 @@
 * [x] React.js
 * [x] MongoDB database via MongoDB Atlas (contact me for credentials)
 ** You need a '.env.build' file at the root of the project with MONGODB_PASS secret
+** You need to whitelist your IP via Atlas interface
 * [x] Mongoose ODM
 * [x] Typescript
 * [x] Eslint
 * [x] Styled-jsx with styled-jsx-plugin-sass
 * [x] Basic Cypress tests
+* [x] Draft.js wysiwyg
 * [ ] Image upload (instead of random selection)
 * [ ] Better post updating (it updates if same title is used)
 * [ ] Fix nyc test coverage with Typescript
