@@ -1,7 +1,6 @@
 import nextConnect from 'next-connect'
 import {ObjectID} from 'bson'
 import log from 'loglevel'
-import glob from 'glob'
 import {NextApiRequest, NextApiResponse} from 'next'
 import {Model} from 'mongoose'
 import middleware from '../../../middleware/database'
@@ -60,9 +59,8 @@ handler.post((req: NextApiReq, res: NextApiResponse) => {
           log.info('Blog post updated!')
         } else {
           // A random image is selected!
-          // TODO not working on Now serverless
-          const imgPaths = glob.sync('public/images/**/*.{jpg,jpeg}')
-          const randomImgPath = imgPaths[Math.floor(Math.random() * imgPaths.length)]
+          const imgPaths = process.env.IMG_PATHS
+          const randomImgPath = imgPaths?.[Math.floor(Math.random() * imgPaths.length)]
           post.heroImage = randomImgPath?.substring(randomImgPath.indexOf('/'))
           // Create new post
           const doc = await req.db.create(post)
