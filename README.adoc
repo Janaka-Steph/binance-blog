@@ -11,6 +11,7 @@
 * [x] Styled-jsx with styled-jsx-plugin-sass
 * [x] Basic Cypress tests
 * [x] Draft.js wysiwyg
+* [x] Responsive design
 * [x] Deployed on Zeit Now
 * [ ] Image upload (instead of random selection)
 * [ ] Better post updating (it updates if same title is used)
