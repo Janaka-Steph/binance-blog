@@ -11,8 +11,7 @@
 * [x] Styled-jsx with styled-jsx-plugin-sass
 * [x] Basic Cypress tests
 * [x] Draft.js wysiwyg
-* [ ] Fix deployment on Zeit Now
-** Current issue accessing images in public from serverless function
+* [x] Deployed on Zeit Now
 * [ ] Image upload (instead of random selection)
 * [ ] Better post updating (it updates if same title is used)
 * [ ] Fix nyc test coverage with Typescript
