@@ -3,7 +3,25 @@ import log from 'loglevel'
 import mongoose from 'mongoose'
 import {generateSlugFromTitle} from '../utils'
 
+const db = mongoose.connection
 const connectionString = `mongodb+srv://steph_atlas:${process.env.MONGODB_PASS}@cluster0-8bl57.gcp.mongodb.net/binance`
+
+if (db.readyState === 0) {
+  mongoose.connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+}
+
+db.on('connected', () => {
+  log.info('Connected to MongoDB database')
+})
+db.on('disconnected', () => {
+  log.warn('Mongodb connection disconnected')
+})
+db.on('error', (err) => {
+  log.error('Error in mongodb connection:', err)
+})
 
 const Schema = mongoose.Schema
 const PostSchema = new Schema({
@@ -22,19 +40,6 @@ PostSchema.pre('save', function preCb(next) {
 })
 
 function database(req: any, res: any, next: any) {
-  const db = mongoose.connection
-  db.on('error', (err) => {
-    log.error('Error in mongodb connection:', err)
-  })
-
-  if (db.readyState !== 1) {
-    mongoose.connect(connectionString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-      .then(() => log.info('Connected to database'))
-      .catch((err) => log.error(err))
-  }
   req.db = mongoose.models.Post || mongoose.model('Post', PostSchema)
   next()
 }
