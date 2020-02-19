@@ -5,6 +5,7 @@ import draftToHtml from 'draftjs-to-html'
 import axios from 'axios'
 import sanitizeHTML from 'sanitize-html'
 import {NextPageContext} from 'next'
+import Head from 'next/head'
 import {getBaseURL} from '../../utils'
 
 type BlogTemplateProps = Post & {
@@ -31,6 +32,10 @@ const BlogTemplate = ({
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+
       <article className="blog">
         <figure className="blog__hero">
           <img
