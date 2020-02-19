@@ -32,4 +32,4 @@ handler.get(async (req: NextApiReq, res: NextApiResponse) => {
   }
 })
 
-export default handler
+export default (req: NextApiReq, res: NextApiResponse) => handler.apply(req, res)
