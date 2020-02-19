@@ -203,7 +203,7 @@ BlogTemplate.getInitialProps = async ({query, req}: NextPageContext) => {
   try {
     const {slug} = query
     const res = await axios.get(`/api/blog/${slug}`, {baseURL: getBaseURL(req)})
-    post = await res.data
+    post = res.data
   } catch (err) {
     log.error(err)
     return {

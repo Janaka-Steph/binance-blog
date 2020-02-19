@@ -27,7 +27,7 @@ Home.getInitialProps = async ({req}: NextPageContext) => {
   let posts = {}
   try {
     const res = await axios.get('/api/blog', {baseURL: getBaseURL(req)})
-    posts = await res.data
+    posts = res.data
   } catch (err) {
     log.error(err)
   }
